@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.ext.declarative import DeclarativeMeta, declarative_base
 from app.config import settings
 
@@ -10,7 +10,7 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 # Dependency to get the database session
 
 
-def get_db() -> DeclarativeMeta:  # type: ignore
+def get_db() -> Session:
     db = SessionLocal()
     try:
         yield db

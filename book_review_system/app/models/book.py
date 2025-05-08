@@ -14,6 +14,9 @@ class BookCreate(BookBase):
 class BookOut(BookBase):
     id: int
 
+    class Config:
+        orm_mode = True
+
 
 class BookInDB(BookOut):
     pass
