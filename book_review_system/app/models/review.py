@@ -1,9 +1,10 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class ReviewBase(BaseModel):
     text: str
-    rating: int
+    rating: int = Field(..., description="The rating of the review, from 1 to 5", ge=1, le=5)
+    book_id: int
 
 
 class ReviewCreate(ReviewBase):
@@ -12,6 +13,10 @@ class ReviewCreate(ReviewBase):
 
 class ReviewOut(ReviewBase):
     id: int
+    book_id: int
+
+    class Config:
+        orm_mode = True
 
 
 class ReviewInDB(ReviewOut):
